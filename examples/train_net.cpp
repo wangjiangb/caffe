@@ -33,5 +33,12 @@ int main(int argc, char** argv) {
   }
   LOG(INFO) << "Optimization Done.";
 
+  LOG(INFO) << "Dumping network parameters.....";
+  NetParameter net_params;
+  solver.net()->ToProto(&net_params, true);
+  WriteProtoToBinaryFile(net_params, "./network.bin");
+
+  LOG(INFO) << "Network parameters written to network.bin";
+
   return 0;
 }
