@@ -10,9 +10,9 @@ SET( SRC_FILES
    "syncedmem.cpp"
    "layer_factory.cpp"
    "solver.cpp"
-   "util/io.cpp"
    "util/im2col.cpp"
    "util/math_functions.cpp"
+   "util/io.cpp"
 )
 
 
@@ -28,12 +28,11 @@ ADD_SUBDIRECTORY( "proto/" )
 #----Including the protobuffer header----------
 CUDA_INCLUDE_DIRECTORIES("${CMAKE_CURRENT_BINARY_DIR}/../"
 ${PROTOBUF_INCLUDE_DIR} ${MKL_INCLUDE_DIR})
-CUDA_ADD_LIBRARY(CaffeLayers  ${CUDA_FILES})
+CUDA_ADD_LIBRARY(CaffeLayers SHARED ${CUDA_FILES})
 target_link_libraries(CaffeLayers CaffeProto)
 
-ADD_LIBRARY(Caffe ${SRC_FILES})
-target_include_directories(Caffe PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/../"
-${PROTOBUF_INCLUDE_DIR})
+ADD_LIBRARY(Caffe SHARED ${SRC_FILES})
+target_include_directories(Caffe PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/../" ${PROTOBUF_INCLUDE_DIR})
 target_link_libraries(Caffe CaffeProto CaffeLayers)
 
 INSTALL(
@@ -41,3 +40,6 @@ INSTALL(
    LIBRARY DESTINATION lib
    ARCHIVE DESTINATION lib
 )
+
+#---------Google Test--------
+ADD_SUBDIRECTORY("test")

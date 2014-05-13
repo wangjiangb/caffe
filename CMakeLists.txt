@@ -39,14 +39,39 @@ FIND_PACKAGE( Protobuf REQUIRED)
 FIND_PACKAGE( OpenCV REQUIRED)
 FIND_PACKAGE(GLog REQUIRED)
 FIND_PACKAGE(LevelDB REQUIRED)
+FIND_PACKAGE(GTest REQUIRED)
+
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode arch=compute_20,code=sm_20 )
 
 #==============Additional Include and Library=========================
 SET(ADDITIONAL_INCLUDE "/usr/include/c++/4.6/ /usr/local/include /usr/include/python2.7
     /usr/local/lib/python2.7/dist-packages/numpy/core/include /home/jwa368/lib/include
-    /usr/local/cuda-5.0/include")
+    /usr/local/cuda-5.0/include"
+    ${GTEST_INCLUDE_DIR}
+    ${OPENCV_INCLUDE_DIRS}
+    ${LevelDB_INCLUDE_PATH}
+    ${MKL_INCLUDE_DIRS}
+    ${GLOG_INCLUDE_DIRS}
+    ${Boost_INCLUDE_DIRS})
 
-SET(ADDITIONAL_LIBRARY "/usr/lib /usr/local/lib /home/jwa368/lib/lib /home/jwa368/lib/mkl/lib/intel64")
+SET(ADDITIONAL_LIBRARY
+  ${CMAKE_THREAD_LIBS_INIT}
+  ${OPENCV_LIBRARIES}
+  ${GLOG_LIBRARIES}
+  ${LevelDB_LIBRARY}
+  ${MKL_LIBRARIES}
+  ${Boost_LIBRARIES}
+  -lcudart
+  -lcublas
+  -lcurand
+  -lpthread
+  -lsnappy
+  -lopencv_highgui
+  -lopencv_core
+  -lopencv_imgproc
+  -lmkl_rt
+  -lmkl_core
+  -lmkl_gnu_thread)
 
 #===========Set release/debug settings==========
 IF( CMAKE_COMPILER_IS_GNUCXX )
@@ -63,6 +88,10 @@ ENDIF()
 #============Add Include directories============
 INCLUDE_DIRECTORIES( ${include_DIR} $ADDITIONAL_INCLUDE)
 
+
+#=============Google Test Main===================
+#ADD_SUBDIRECTORY("src/gtest")
+enable_testing()
 
 #=============Process Subdirectories============
 ADD_SUBDIRECTORY( "src/caffe" )

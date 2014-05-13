@@ -1,0 +1,1 @@
+add_library(gtest_main  "gtest_main.cc" "gtest-all.cpp")
