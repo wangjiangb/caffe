@@ -27,5 +27,5 @@ SET(EXAMPLE_FILES
 foreach(EXAMPLE_FILE ${EXAMPLE_FILES})
   add_executable(${EXAMPLE_FILE} ${EXAMPLE_FILE}.cpp)
   target_link_libraries(${EXAMPLE_FILE} Caffe CaffeProto CaffeLayers ${MORE_LIBS})
-  target_include_directories(${EXAMPLE_FILE} PUBLIC ${MORE_INCS})
+  #target_include_directories(${EXAMPLE_FILE} PUBLIC ${MORE_INCS})
 endforeach(EXAMPLE_FILE)
