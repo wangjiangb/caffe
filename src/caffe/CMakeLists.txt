@@ -32,7 +32,7 @@ CUDA_ADD_LIBRARY(CaffeLayers SHARED ${CUDA_FILES})
 target_link_libraries(CaffeLayers CaffeProto)
 
 ADD_LIBRARY(Caffe SHARED ${SRC_FILES})
-target_include_directories(Caffe PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/../" ${PROTOBUF_INCLUDE_DIR})
+target_include_directories(Caffe PUBLIC "${CMAKE_CURRENT_BINARY_DIR}/../" ${MKL_INCLUDE_DIR})
 target_link_libraries(Caffe CaffeProto CaffeLayers)
 
 INSTALL(

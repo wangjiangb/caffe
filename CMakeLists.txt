@@ -58,19 +58,15 @@ SET(ADDITIONAL_LIBRARY
   ${OPENCV_LIBRARIES}
   ${GLOG_LIBRARIES}
   ${LevelDB_LIBRARY}
-  ${MKL_LIBRARIES}
+  ${LIB_MKL_RT}
+  ${LIB_PTHREAD}
+  ${CUDA_CUBLAS_LIBRARIES}
+  ${CUDA_curand_LIBRARY}	
   ${Boost_LIBRARIES}
-  -lcudart
-  -lcublas
-  -lcurand
-  -lpthread
   -lsnappy
   -lopencv_highgui
   -lopencv_core
-  -lopencv_imgproc
-  -lmkl_rt
-  -lmkl_core
-  -lmkl_gnu_thread)
+  -lopencv_imgproc)
 
 #===========Set release/debug settings==========
 IF( CMAKE_COMPILER_IS_GNUCXX )
