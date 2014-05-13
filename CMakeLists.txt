@@ -30,7 +30,6 @@ OPTION( DO_PROFILING
 #==============Custom Cmake Modules=============
 SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules" )
 
-
 #==============Packages=========================
 #FIND_PACKAGE( Boost REQUIRED )
 FIND_PACKAGE( CUDA REQUIRED )
@@ -43,15 +42,14 @@ FIND_PACKAGE(GTest REQUIRED)
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode arch=compute_20,code=sm_20 -Xcompiler -fPIC -O2 -use_fast_math)
 
 #==============Additional Include and Library=========================
-SET(ADDITIONAL_INCLUDE "/usr/include/c++/4.6/ /usr/local/include /usr/include/python2.7
-    /usr/local/lib/python2.7/dist-packages/numpy/core/include /home/jwa368/lib/include
-    /usr/local/cuda-5.0/include"
+SET(ADDITIONAL_INCLUDE 
     ${GTEST_INCLUDE_DIR}
     ${OPENCV_INCLUDE_DIRS}
     ${LevelDB_INCLUDE_PATH}
     ${MKL_INCLUDE_DIRS}
     ${GLOG_INCLUDE_DIRS}
-    ${Boost_INCLUDE_DIRS})
+    ${Boost_INCLUDE_DIRS}
+    ${CUDA_INCLUDE_DIRS})
 
 SET(ADDITIONAL_LIBRARY
   ${CMAKE_THREAD_LIBS_INIT}
@@ -61,7 +59,7 @@ SET(ADDITIONAL_LIBRARY
   ${LIB_MKL_RT}
   ${LIB_PTHREAD}
   ${CUDA_CUBLAS_LIBRARIES}
-  ${CUDA_curand_LIBRARY}	
+  ${CUDA_curand_LIBRARY}
   ${Boost_LIBRARIES}
   -lsnappy
   -lopencv_highgui
@@ -81,12 +79,11 @@ IF( CMAKE_COMPILER_IS_GNUCXX )
 ENDIF()
 
 #============Add Include directories============
-INCLUDE_DIRECTORIES( ${include_DIR} $ADDITIONAL_INCLUDE)
+INCLUDE_DIRECTORIES( ${include_DIR} ${ADDITIONAL_INCLUDE})
 
 
 #=============Google Test Main===================
 #ADD_SUBDIRECTORY("src/gtest")
-enable_testing()
 
 #=============Process Subdirectories============
 ADD_SUBDIRECTORY( "src/caffe" )
