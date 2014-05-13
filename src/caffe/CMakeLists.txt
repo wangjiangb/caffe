@@ -42,4 +42,7 @@ INSTALL(
 )
 
 #---------Google Test--------
-ADD_SUBDIRECTORY("test")
+IF(BUILD_TEST)
+  enable_testing()
+  ADD_SUBDIRECTORY("test")
+ENDIF()

@@ -30,7 +30,7 @@ OPTION( DO_PROFILING
 #==============Custom Cmake Modules=============
 SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules" )
 
-
+SET(BUILD_TEST ON)
 #==============Packages=========================
 #FIND_PACKAGE( Boost REQUIRED )
 FIND_PACKAGE( CUDA REQUIRED )
@@ -61,7 +61,7 @@ SET(ADDITIONAL_LIBRARY
   ${LIB_MKL_RT}
   ${LIB_PTHREAD}
   ${CUDA_CUBLAS_LIBRARIES}
-  ${CUDA_curand_LIBRARY}	
+  ${CUDA_curand_LIBRARY}
   ${Boost_LIBRARIES}
   -lsnappy
   -lopencv_highgui
@@ -86,7 +86,6 @@ INCLUDE_DIRECTORIES( ${include_DIR} $ADDITIONAL_INCLUDE)
 
 #=============Google Test Main===================
 #ADD_SUBDIRECTORY("src/gtest")
-enable_testing()
 
 #=============Process Subdirectories============
 ADD_SUBDIRECTORY( "src/caffe" )
