@@ -32,9 +32,13 @@ SET( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_SOURCE_DIR}/CMakeModules" )
 
 
 #==============Packages=========================
-FIND_PACKAGE( Boost REQUIRED )
+#FIND_PACKAGE( Boost REQUIRED )
 FIND_PACKAGE( CUDA REQUIRED )
 FIND_PACKAGE( MKL REQUIRED )
+FIND_PACKAGE( Protobuf REQUIRED)
+FIND_PACKAGE( OpenCV REQUIRED)
+FIND_PACKAGE(GLog REQUIRED)
+FIND_PACKAGE(LevelDB REQUIRED)
 set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode arch=compute_20,code=sm_20 )
 
 #==============Additional Include and Library=========================
@@ -62,5 +66,5 @@ INCLUDE_DIRECTORIES( ${include_DIR} $ADDITIONAL_INCLUDE)
 
 #=============Process Subdirectories============
 ADD_SUBDIRECTORY( "src/caffe" )
-ADD_SUBDIRECTORY( "src/test" )
+#ADD_SUBDIRECTORY( "src/test" )
 ADD_SUBDIRECTORY( "examples/" )
