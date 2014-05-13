@@ -40,8 +40,7 @@ FIND_PACKAGE( OpenCV REQUIRED)
 FIND_PACKAGE(GLog REQUIRED)
 FIND_PACKAGE(LevelDB REQUIRED)
 FIND_PACKAGE(GTest REQUIRED)
-
-set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode arch=compute_20,code=sm_20 )
+set(CUDA_NVCC_FLAGS ${CUDA_NVCC_FLAGS};-gencode arch=compute_20,code=sm_20 -Xcompiler -fPIC -O2 -use_fast_math)
 
 #==============Additional Include and Library=========================
 SET(ADDITIONAL_INCLUDE "/usr/include/c++/4.6/ /usr/local/include /usr/include/python2.7
